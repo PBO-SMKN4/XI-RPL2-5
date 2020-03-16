@@ -11,12 +11,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame {
+public class loginGuru extends javax.swing.JFrame {
 
     Connection koneksi;
     Statement stmt = null;
     
-    public Login() {
+    public loginGuru() {
         initComponents();
         koneksi = DatabaseConnection.getKoneksi("localhost", "3306", "root", "", "db_manajemensekolah");
     }
@@ -24,7 +24,7 @@ public class Login extends javax.swing.JFrame {
     public void cekLogin(){
         try{
             if (textUser.getText().equals("") || textPass.getPassword().equals("")) {
-                JOptionPane.showMessageDialog(null, "Data Tidak Boleh Kosong", "Pesan", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Kosong Yeuh", "Pesan", JOptionPane.ERROR_MESSAGE);
                 textUser.requestFocus();
                 hapus();
             }else{
@@ -34,9 +34,9 @@ public class Login extends javax.swing.JFrame {
                 ResultSet rst = stmt.executeQuery(sql);
                 if(rst.next()){
                     this.dispose();
-                    new FRekapNilai_Guru().setVisible(true);
+                    new FManageRekapNilai().setVisible(true);
                 }else{
-                JOptionPane.showMessageDialog(null, "Nip dan Password Salah\n Atau akun belum terdaftar", 
+                JOptionPane.showMessageDialog(null, "NIP dan Password Salah\n Atau akun belum terdaftar", 
                         "Pesan", JOptionPane.ERROR_MESSAGE);
                 hapus();
                 }
@@ -69,6 +69,7 @@ public class Login extends javax.swing.JFrame {
         textUser = new javax.swing.JTextField();
         textPass = new javax.swing.JPasswordField();
         ButtonLogin = new javax.swing.JButton();
+        ButtonBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +88,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        ButtonBack.setText("Back");
+        ButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,14 +102,19 @@ public class Login extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButtonLogin)
-                    .addComponent(textPass, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addComponent(textUser))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textPass, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(textUser)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ButtonBack)
+                        .addGap(18, 18, 18)
+                        .addComponent(ButtonLogin)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,9 +129,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(textPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
-                .addComponent(ButtonLogin)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonLogin)
+                    .addComponent(ButtonBack))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +155,12 @@ public class Login extends javax.swing.JFrame {
         cekLogin();
     }//GEN-LAST:event_ButtonLoginActionPerformed
 
+    private void ButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBackActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Index().setVisible(true);
+    }//GEN-LAST:event_ButtonBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -157,25 +178,27 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginGuru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginGuru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginGuru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(loginGuru.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new loginGuru().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonBack;
     private javax.swing.JButton ButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

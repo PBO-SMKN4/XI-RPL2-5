@@ -77,7 +77,7 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
         Inputt4 = new javax.swing.JTextField();
         Inputt5 = new javax.swing.JTextField();
         BtnEdit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnTambah = new javax.swing.JButton();
         BtnRefresh = new javax.swing.JButton();
         BtnSearch = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -182,7 +182,12 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        BtnTambah.setText("Tambah");
+        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahActionPerformed(evt);
+            }
+        });
 
         BtnRefresh.setText("Refresh");
         BtnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -253,7 +258,7 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel8))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(BtnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(BtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -312,7 +317,7 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(44, 44, 44)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(BtnTambah)
                     .addComponent(BtnEdit)
                     .addComponent(BtnRefresh))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -335,7 +340,7 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
         jDesktopPane1.setLayer(Inputt4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(Inputt5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BtnEdit, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(BtnTambah, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BtnRefresh, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(BtnSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -448,23 +453,45 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
     private void BtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSearchActionPerformed
         try{
             Statement stmt = koneksi.createStatement();
-            String query = "SELECT * FROM t_siswa "
-                    + " WHERE nis LIKE %" + Inputcari.getText() + "%" 
-                    + " OR nama_lengkap LIKE '%" + Inputcari.getText() + "%'"
-                    + " OR kelas LIKE '%" + Inputcari.getText() + "%'";
+            String query = "SELECT * FROM t_rekapnilai,t_siswa JOIN t_matpel "
+                    + " WHERE t_matpel.kd_matpel = t_rekapnilai.kd_matpel "
+                    + " AND t_siswa.nis = t_rekapnilai.nis "
+                    + " AND t_rekapnilai.nis LIKE '%" + Inputcari.getText() + "%'" 
+                    + " OR t_siswa.nama_lengkap LIKE '%" + Inputcari.getText() + "%'"
+                    + " OR t_siswa.kelas LIKE '%" + Inputcari.getText() + "%'";
             System.out.println(query);
-            int berhasil = stmt.executeUpdate(query);
+            ResultSet rs = stmt.executeQuery(query);
             showData();
-            if(berhasil == 1){
-                JOptionPane.showMessageDialog(null,"Data Berhasil Dicari");
-            }else {
-                JOptionPane.showMessageDialog(null,"Data Gagal DiCari");
-            }
         }catch (Exception ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Terjadi Kesalahan Pada Database");
         }
     }//GEN-LAST:event_BtnSearchActionPerformed
+
+    private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
+       String nis      = Inputnis.getText();
+       String nama     = Inputnama.getText();
+       String kelas    = Inputkelas.getText();
+       
+       try{
+            Statement stmt = koneksi.createStatement();
+            String query = "INSERT INTO t_siswa VALUES( "
+                    + "nis          = '"+nis+"',"
+                    + "nama_lengkap = '"+nama+"',"
+                    + "kelas        = '"+kelas+"')";
+            System.out.println(query);
+            int berhasil = stmt.executeUpdate(query);
+            showData();
+            if(berhasil == 1){
+                JOptionPane.showMessageDialog(null,"Data Berhasil DiEdit");
+            }else {
+                JOptionPane.showMessageDialog(null,"Data Gagal DiDiedit");
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Terjadi Kesalahan Pada Database");
+        }
+    }//GEN-LAST:event_BtnTambahActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -503,6 +530,7 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
     private javax.swing.JButton BtnEdit;
     private javax.swing.JButton BtnRefresh;
     private javax.swing.JButton BtnSearch;
+    private javax.swing.JButton BtnTambah;
     private javax.swing.JTextField Inputcari;
     private javax.swing.JTextField Inputkelas;
     private javax.swing.JTextField Inputnama;
@@ -512,7 +540,6 @@ public class FRekapNilai_Guru extends javax.swing.JFrame {
     private javax.swing.JTextField Inputt3;
     private javax.swing.JTextField Inputt4;
     private javax.swing.JTextField Inputt5;
-    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

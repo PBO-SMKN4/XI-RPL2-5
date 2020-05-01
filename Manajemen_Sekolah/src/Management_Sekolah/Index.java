@@ -110,7 +110,7 @@ public class Index extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,7 +124,7 @@ public class Index extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(733, 361));
+        setSize(new java.awt.Dimension(733, 371));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

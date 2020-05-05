@@ -5,11 +5,20 @@
  */
 package Management_Sekolah;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author ASUS
  */
 public class Index extends javax.swing.JFrame {
+    private Object jFileChooser1;
 
     /**
      * Creates new form Index
@@ -28,8 +37,9 @@ public class Index extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ButtonGuru = new javax.swing.JButton();
+        ButtonSiswa = new javax.swing.JButton();
+        foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,17 +47,27 @@ public class Index extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("4 Smart Management");
 
-        jButton1.setText("LOGIN GURU");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonGuru.setText("LOGIN GURU");
+        ButtonGuru.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonGuruActionPerformed(evt);
             }
         });
 
-        jButton2.setText("LOGIN SISWA");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ButtonSiswa.setText("LOGIN SISWA");
+        ButtonSiswa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ButtonSiswaActionPerformed(evt);
+            }
+        });
+
+        foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/guru.png"))); // NOI18N
+        foto.setMaximumSize(new java.awt.Dimension(200, 200));
+        foto.setMinimumSize(new java.awt.Dimension(200, 200));
+        foto.setPreferredSize(new java.awt.Dimension(200, 200));
+        foto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fotoMouseClicked(evt);
             }
         });
 
@@ -58,36 +78,60 @@ public class Index extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
-                .addComponent(jButton1)
+                .addComponent(ButtonGuru)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(ButtonSiswa)
                 .addGap(145, 145, 145))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(ButtonGuru)
+                    .addComponent(ButtonSiswa))
                 .addGap(116, 116, 116))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonGuruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGuruActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new loginGuru().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ButtonGuruActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ButtonSiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSiswaActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new LoginSiswa().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ButtonSiswaActionPerformed
+
+    private void fotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoMouseClicked
+         int gambar = jFileChooser1.showOpenDialog(null);
+        if (gambar == JFileChooser.APPROVE_OPTION) {
+            File f = jFileChooser1.getSelectedFile();
+
+            BufferedImage loadImg = loadImage(f.toString());
+
+             //proses resize gambar
+             BufferedImage gambar_c = resize(loadImg, 300, 300);
+            ImageIcon imageicon = new ImageIcon(gambar_c);
+
+            //System.out.println("panjang : "+h);
+            //System.out.println("tinggi : "+w);
+            jLabel1.setIcon(imageicon);
+
+        }
+    }//GEN-LAST:event_fotoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -123,10 +167,39 @@ public class Index extends javax.swing.JFrame {
             }
         });
     }
+    public static BufferedImage loadImage(String alamat) {
+        BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(new File(alamat));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bi;
+    }
+    
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+
+        int w = img.getWidth();
+        int h = img.getHeight();
+        BufferedImage dimg = dimg = new BufferedImage(newW, newH, img.getType());
+        Graphics2D g = dimg.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
+
+        g.dispose();
+        System.out.println("Ukuran awal gambar panjang : " + w);
+        System.out.println("Ukuran awal gambar tinggi : " + h);
+
+        return dimg;
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ButtonGuru;
+    private javax.swing.JButton ButtonSiswa;
+    private javax.swing.JLabel foto;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

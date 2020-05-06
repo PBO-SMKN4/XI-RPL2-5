@@ -15,6 +15,7 @@ public class loginGuru extends javax.swing.JFrame {
 
     Connection koneksi;
     Statement stmt = null;
+    String status;
     
     public loginGuru() {
         initComponents();

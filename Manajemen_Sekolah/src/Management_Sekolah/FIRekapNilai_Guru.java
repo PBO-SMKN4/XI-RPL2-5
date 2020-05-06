@@ -38,6 +38,7 @@ public class FIRekapNilai_Guru extends javax.swing.JInternalFrame {
             int no = 1;
             while(rs.next()){
                 String nis             = rs.getString("nis");
+                String nip             = rs.getString("nip");
                 String nama_lengkap    = rs.getString("nama_lengkap");
                 String kelas           = rs.getString("kelas");
                 String nama_matpel     = rs.getString("nama_matpel");

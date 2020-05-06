@@ -1,12 +1,15 @@
 package Management_Sekolah;
 import java.awt.Color;
+import java.sql.Connection;
 public class FHome extends javax.swing.JFrame {
-
+    
+    Connection koneksi;
     Color panedefault;
     Color paneClick;
     
     public FHome() {
         initComponents();
+        koneksi = DatabaseConnection.getKoneksi("localhost", "3306", "root", "", "db_manajemensekolah");
         
         panedefault = new Color(51,255,153);
         paneClick = new Color(0, 255, 255);
@@ -38,6 +41,7 @@ public class FHome extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -252,15 +256,21 @@ public class FHome extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
+        jLabel5.setFont(new java.awt.Font("Elephant", 0, 48)); // NOI18N
+        jLabel5.setText("4 Smart Management");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1000, 60));
@@ -320,11 +330,13 @@ public class FHome extends javax.swing.JFrame {
     private void PanerekapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanerekapMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_PanerekapMousePressed
-
+   String status;
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         jDesktopPane1.removeAll();
         FIRekapNilai_Guru firekap = new FIRekapNilai_Guru();
-        jDesktopPane1.add(firekap).setVisible(true);
+        FIRekapNilai_Siswa firekapsis = new FIRekapNilai_Siswa();
+
+            jDesktopPane1.add(firekap).setVisible(true);
     }//GEN-LAST:event_jPanel7MouseClicked
 
     /**
@@ -371,6 +383,7 @@ public class FHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

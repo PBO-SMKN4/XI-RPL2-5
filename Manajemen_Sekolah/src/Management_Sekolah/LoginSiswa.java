@@ -32,7 +32,7 @@ public class LoginSiswa extends javax.swing.JFrame {
                 ResultSet rst = stmt.executeQuery(sql);
                 if(rst.next()){
                     this.dispose();
-                    new FHome().setVisible(true);
+                    new dashboardSiswa().setVisible(true);
                 }else{
                 JOptionPane.showMessageDialog(null, "NIS dan Password Salah\n Atau akun belum terdaftar", 
                         "Pesan", JOptionPane.ERROR_MESSAGE);

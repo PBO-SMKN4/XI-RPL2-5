@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartmanagement;
+package Management_Sekolah;
 
+import Management_Sekolah.DatabaseConnection;
 import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Component;
@@ -21,11 +22,12 @@ import javax.swing.table.TableColumnModel;
  */
 public class dashboardGuru extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dashboardSiswa
-     */
+    Connection koneksi;
+    
     public dashboardGuru() {
         initComponents();
+        koneksi = DatabaseConnection.getKoneksi("localhost", "3306", "root", "", "db_manajemensekolah");
+        
         header.setFocusable(true);       
     }
     
@@ -328,17 +330,17 @@ public class dashboardGuru extends javax.swing.JFrame {
         btnHome.setLayout(btnHomeLayout);
         btnHomeLayout.setHorizontalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnHomeLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+            .addGroup(btnHomeLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         btnHomeLayout.setVerticalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnHomeLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jLabel18)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         sidebar.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 210, 50));
@@ -366,21 +368,17 @@ public class dashboardGuru extends javax.swing.JFrame {
         btnMateri.setLayout(btnMateriLayout);
         btnMateriLayout.setHorizontalGroup(
             btnMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-            .addGroup(btnMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnMateriLayout.createSequentialGroup()
-                    .addContainerGap(18, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(83, Short.MAX_VALUE)))
+            .addGroup(btnMateriLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         btnMateriLayout.setVerticalGroup(
             btnMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(btnMateriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnMateriLayout.createSequentialGroup()
-                    .addContainerGap(13, Short.MAX_VALUE)
-                    .addComponent(jLabel10)
-                    .addContainerGap(13, Short.MAX_VALUE)))
+            .addGroup(btnMateriLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         sidebar.add(btnMateri, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 210, 50));
@@ -407,21 +405,17 @@ public class dashboardGuru extends javax.swing.JFrame {
         btnNilai.setLayout(btnNilaiLayout);
         btnNilaiLayout.setHorizontalGroup(
             btnNilaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-            .addGroup(btnNilaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnNilaiLayout.createSequentialGroup()
-                    .addContainerGap(36, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(59, Short.MAX_VALUE)))
+            .addGroup(btnNilaiLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         btnNilaiLayout.setVerticalGroup(
             btnNilaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(btnNilaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnNilaiLayout.createSequentialGroup()
-                    .addContainerGap(13, Short.MAX_VALUE)
-                    .addComponent(jLabel11)
-                    .addContainerGap(13, Short.MAX_VALUE)))
+            .addGroup(btnNilaiLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         sidebar.add(btnNilai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 50));
@@ -448,21 +442,16 @@ public class dashboardGuru extends javax.swing.JFrame {
         btnMapel.setLayout(btnMapelLayout);
         btnMapelLayout.setHorizontalGroup(
             btnMapelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-            .addGroup(btnMapelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btnMapelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel12)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(btnMapelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel12)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         btnMapelLayout.setVerticalGroup(
             btnMapelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(btnMapelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btnMapelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel12)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(btnMapelLayout.createSequentialGroup()
+                .addComponent(jLabel12)
+                .addGap(0, 30, Short.MAX_VALUE))
         );
 
         sidebar.add(btnMapel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 50));
@@ -497,17 +486,16 @@ public class dashboardGuru extends javax.swing.JFrame {
         btnSetting.setLayout(btnSettingLayout);
         btnSettingLayout.setHorizontalGroup(
             btnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSettingLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+            .addGroup(btnSettingLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         btnSettingLayout.setVerticalGroup(
             btnSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSettingLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+            .addGroup(btnSettingLayout.createSequentialGroup()
                 .addComponent(jLabel13)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
 
         sidebar.add(btnSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, 50));
@@ -3255,9 +3243,8 @@ public class dashboardGuru extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(tampilSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Theme2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(tampilSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Theme1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(Theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Theme1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(256, Short.MAX_VALUE))
         );
 

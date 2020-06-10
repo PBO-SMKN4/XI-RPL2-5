@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package smartmanagement;
 
+package Management_Sekolah;
+
+import Management_Sekolah.DatabaseConnection;
 import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,17 +12,18 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-/**
- *
- * @author Asus
- */
-public class dashboardSiswa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dashboardSiswa
-     */
+public class dashboardSiswa extends javax.swing.JFrame {
+    
+    Connection koneksi;
+    
     public dashboardSiswa() {
         initComponents();
+        koneksi = DatabaseConnection.getKoneksi("localhost", "3306", "root", "", "db_manajemensekolah");
+        
+        FIJadwal fijadwal = new FIJadwal();
+        tampilHome.add(fijadwal).setVisible(true);
+        
         header.setFocusable(true);       
     }
     
@@ -1767,6 +1765,8 @@ public class dashboardSiswa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    int x,y;
     
     public void setColor(JPanel p){
         p.setBackground(new Color(153,0,51));

@@ -1,4 +1,4 @@
-package smartmanagement;
+package Management_Sekolah;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,7 @@ package smartmanagement;
  * and open the template in the editor.
  */
 import java.awt.Color;
+import java.sql.Connection;
 import javax.swing.JTextField;
 /**
  *
@@ -13,12 +14,12 @@ import javax.swing.JTextField;
  */
 public class addMateri extends javax.swing.JDialog {
 
-    /**
-     * Creates new form addMateri
-     */
+    Connection koneksi;
+    
     public addMateri(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        koneksi = DatabaseConnection.getKoneksi("localhost", "3306", "root", "", "db_manajemensekolah");
     }
 
     /**

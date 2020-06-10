@@ -35,7 +35,7 @@ public class loginGuru extends javax.swing.JFrame {
                 ResultSet rst = stmt.executeQuery(sql);
                 if(rst.next()){
                     this.dispose();
-                    new FHome().setVisible(true);
+                    new dashboardGuru().setVisible(true);
                 }else{
                 JOptionPane.showMessageDialog(null, "NIP dan Password Salah\n Atau akun belum terdaftar", 
                         "Pesan", JOptionPane.ERROR_MESSAGE);

@@ -232,17 +232,15 @@ public class addMateri extends javax.swing.JDialog {
         
         try{
             Statement stmt = koneksi.createStatement();
-            String query = "INSERT INTO t_materi VALUES( "
-            + "nama_matpel = '"+nama_matpel+"',"        
-            + "judul       = '"+judul+"',"
-            + "catatan     = '"+catatan+"')";
+            String query = "INSERT INTO t_materi (nama_matpel,judul,catatan)" 
+                            + "VALUES('"+nama_matpel+"','"+judul+"','"+catatan+"')";
             System.out.println(query);
             int berhasil = stmt.executeUpdate(query);
             showData();
             if(berhasil == 1){
-                JOptionPane.showMessageDialog(null,"Data Berhasil DiEdit");
+                JOptionPane.showMessageDialog(null,"Data Berhasil DiTambahkan");
             }else {
-                JOptionPane.showMessageDialog(null,"Data Gagal DiDiedit");
+                JOptionPane.showMessageDialog(null,"Data Gagal DiTambahkan");
             }
         }catch (SQLException ex){
             ex.printStackTrace();
